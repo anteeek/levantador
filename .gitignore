@@ -17,3 +17,4 @@ web-report/
 .expo-shared
 
 yarn.lock
+package-lock.json
