@@ -10,6 +10,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import BottomTabNavigator from '../navigation/BottomTabNavigator';
 import useLinking from '../navigation/useLinking';
+import TopBar from './TopBar';
 
 const Stack = createStackNavigator();
 
@@ -52,8 +53,16 @@ export default (props) => {
           return (
             <View style={styles.container}>
               {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-              <NavigationContainer ref={containerRef} initialState={initialNavigationState}>
-                <Stack.Navigator>
+              <NavigationContainer 
+                ref={containerRef} 
+                initialState={initialNavigationState}
+              >
+                <Stack.Navigator
+                  headerMode="screen"
+                  screenOptions={{
+                    header: TopBar
+                  }}
+                >
                   <Stack.Screen name="Root" component={BottomTabNavigator} />
                 </Stack.Navigator>
               </NavigationContainer>

@@ -1,45 +1,37 @@
-import React from 'react';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import TabBarIcon from '../components/TabBarIcon';
-import HomeScreen from '../screens/HomeScreen';
-import AboutScreen from '../screens/AboutScreen';
+import * as React from 'react';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 
-const BottomTab = createBottomTabNavigator();
-const INITIAL_ROUTE_NAME = 'Home';
+import TopBar from "./TopBar";
 
-export default function BottomTabNavigator({ navigation, route }) {
+import {AboutScreen , HomeScreen} from "../screens";
+
+const Tab = createMaterialBottomTabNavigator();
+
+export default function MyTabs({ navigation, route }) {
 
   navigation.setOptions({ headerTitle: getHeaderTitle(route) });
 
   return (
-    <BottomTab.Navigator initialRouteName={INITIAL_ROUTE_NAME}>
-      <BottomTab.Screen
-        name="Home"
-        component={HomeScreen}
-        options={{
-          title: 'Home',
-          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-code-working" />,
+      <Tab.Navigator
+        initialRouteName="Home"
+        headerMode="screen"
+        screenOptions={{
+          header: TopBar
         }}
-      />
-      <BottomTab.Screen
-        name="About"
-        component={AboutScreen}
-        options={{
-          title: 'About',
-          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-book" />,
-        }}
-      />
-    </BottomTab.Navigator>
+      >
+        <Tab.Screen name="home" component={HomeScreen} options={{tabBarIcon: "alarm"}} />
+        <Tab.Screen name="about" component={AboutScreen} options={{tabBarIcon: "unfold-more-vertical"}} />
+      </Tab.Navigator>
   );
 }
 
 function getHeaderTitle(route) {
-  const routeName = route.state?.routes[route.state.index]?.name ?? INITIAL_ROUTE_NAME;
+  const routeName = route.state?.routes[route.state.index]?.name ?? "home";
 
   switch (routeName) {
-    case 'Home':
+    case 'home':
       return 'Main functionality';
-    case 'About':
+    case 'about':
       return 'Learn more';
   }
 }

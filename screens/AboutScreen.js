@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { MonoText } from '../components/StyledText';
 
-export default function LinksScreen() {
+export default function AboutScreen() {
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
       <MonoText>Just get to work already!</MonoText>
