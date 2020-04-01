@@ -1,8 +1,8 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
+import { Text } from "react-native-paper";
 import { ScrollView } from 'react-native-gesture-handler';
 
-import { MonoText } from '../components/StyledText';
 
 export default function HomeScreen() {
   return (
@@ -10,7 +10,7 @@ export default function HomeScreen() {
 
       <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
 
-          <MonoText>sample text</MonoText>
+          <Text>sample text</Text>
 
       </ScrollView>
 

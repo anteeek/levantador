@@ -1,12 +1,12 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
+import { Text } from "react-native-paper";
 import { ScrollView } from 'react-native-gesture-handler';
-import { MonoText } from '../components/StyledText';
 
 export default function AboutScreen() {
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-      <MonoText>Just get to work already!</MonoText>
+      <Text>Just get to work already!</Text>
     </ScrollView>
   );
 }
