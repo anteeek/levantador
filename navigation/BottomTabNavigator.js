@@ -19,8 +19,17 @@ export default function MyTabs({ navigation, route }) {
           header: TopBar
         }}
       >
-        <Tab.Screen name="Home" component={HomeScreen} options={{tabBarIcon: "alarm"}} />
-        <Tab.Screen name="About" component={AboutScreen} options={{tabBarIcon: "unfold-more-vertical"}} />
+        <Tab.Screen 
+           name="Home"
+           component={HomeScreen}
+           activeColor="black"
+           options={{tabBarIcon: "alarm"}}
+         />
+        <Tab.Screen 
+           name="About"
+           component={AboutScreen} 
+           options={{tabBarIcon: "unfold-more-vertical"}} 
+         />
       </Tab.Navigator>
   );
 }

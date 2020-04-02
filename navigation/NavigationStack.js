@@ -7,11 +7,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import {
-  Provider as PaperProvider,
-  DarkTheme,
-  DefaultTheme,
-  Theme,
+  Provider as PaperProvider
 } from 'react-native-paper';
+
+import {DarkTheme, Theme} from "../constants";
 
 import BottomTabNavigator from '../navigation/BottomTabNavigator';
 import useLinking from '../navigation/useLinking';
@@ -53,12 +52,13 @@ export default (props) => {
         return null;
       } else {
           return (
-            <PaperProvider theme={isDarkModeOn ? Theme : DarkTheme}>
+            <PaperProvider theme={isDarkModeOn ? DarkTheme : Theme}>
               <View style={styles.container}>
                 {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
                 <NavigationContainer 
                   ref={containerRef} 
                   initialState={initialNavigationState}
+                   theme={isDarkModeOn ? DarkTheme : Theme}
                 >
                   <Stack.Navigator
                     headerMode="screen"
