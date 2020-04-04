@@ -25,11 +25,10 @@ export default class extends React.PureComponent {
     render() {
 
         return (
-            <View>
-                <PaginationWizard onSubmit={this.onFormSubmitted} onChangeValue={this.onChangeValue}>
-                    <PaginationWizard.Step>{LocationSelectionStep}</PaginationWizard.Step>
-                </PaginationWizard>
-            </View>
+            <PaginationWizard onSubmit={this.onFormSubmitted} onChangeValue={this.onChangeValue} stepNames={["Location", "Based on", "Length"]}>
+                <PaginationWizard.Step>{LocationSelectionStep}</PaginationWizard.Step>
+                <PaginationWizard.Step>{LocationSelectionStep}</PaginationWizard.Step>
+            </PaginationWizard>
         )
     }
 }

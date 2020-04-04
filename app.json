@@ -5,9 +5,7 @@
     "privacy": "public",
     "sdkVersion": "36.0.0",
     "platforms": [
-      "ios",
-      "android",
-      "web"
+      "android"
     ],
     "version": "1.0.0",
     "orientation": "portrait",
@@ -26,6 +24,15 @@
     ],
     "ios": {
       "supportsTablet": true
+    },
+    "android": {
+      "package": "mag.levantador",
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyBQffJyZje_4vJRjWcVS6AK860D6Fsf_BY"
+        }
+      }
     }
   }
+
 }

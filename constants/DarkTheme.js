@@ -18,7 +18,7 @@ export default {
   mode: 'adaptive',
   colors: {
     ...DefaultTheme.colors,
-    primary: yankeeBlue,
+    primary: white,
     accent: arsenic,
     background: gunmetal,
     error: passiveAgressive,
