@@ -1,33 +1,43 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import { Text } from "react-native-paper";
-import { ScrollView } from 'react-native-gesture-handler';
+import { View } from 'react-native';
+import { Title, Button } from "react-native-paper";
 
 
-export default function HomeScreen() {
-  return (
+export default ({navigation}) => (
     <View style={styles.container}>
 
-      <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+        <View style={styles.titleContainer}>
+          <Title style={styles.title}>It's been a while! What are we going to do today?</Title>
+        </View>
 
-          <Text>sample text</Text>
-
-      </ScrollView>
-
+        <Button mode="contained" style={styles.button} onPress={() => navigation.navigate("ExistingAlarms")}>
+          Select an existing alarm
+        </Button>
+        
+        <Button mode="contained" style={styles.button} onPress={() => navigation.navigate("NewAlarm")}>
+          Create a new alarm
+        </Button>
 
     </View>
   );
-}
 
-HomeScreen.navigationOptions = {
-  header: null,
-};
-
-const styles = StyleSheet.create({
+const styles = {
   container: {
-    flex: 1,
+    flex: 1
   },
-  contentContainer: {
-    paddingTop: 30,
+  titleContainer: {
+    height: 90,
+    marginTop: 20,
+  },
+  title: {
+    fontSize: 30,
+    fontWeight: "900",
+    textAlign: "center"
+  },
+  button: {
+    width: "70%",
+    marginTop: 20,
+    marginLeft: "auto",
+    marginRight: "auto"
   }
-});
+}

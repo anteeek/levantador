@@ -13,6 +13,12 @@ export default function(containerRef) {
           Settings: 'settings',
         },
       },
+      NewAlarm: {
+        path: 'NewAlarm'
+      },
+      ExistingAlarms: {
+        path: 'ExistingAlarms'
+      }
     },
   });
 }

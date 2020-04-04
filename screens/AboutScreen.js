@@ -8,7 +8,7 @@ export default function AboutScreen() {
       
     </View>
   );
-}
+  }
 
 const styles = {
   container: {

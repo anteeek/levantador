@@ -16,6 +16,8 @@ import BottomTabNavigator from '../navigation/BottomTabNavigator';
 import useLinking from '../navigation/useLinking';
 import TopBar from './TopBar';
 
+import {NewAlarm, ExistingAlarms} from "../screens";
+
 const Stack = createStackNavigator();
 
 export default (props) => {
@@ -67,6 +69,8 @@ export default (props) => {
                     }}
                   >
                     <Stack.Screen name="Root" component={BottomTabNavigator} />
+                    <Stack.Screen name="NewAlarm" component={NewAlarm} />
+                    <Stack.Screen name="ExistingAlarms" component={ExistingAlarms} />
                   </Stack.Navigator>
                 </NavigationContainer>
               </View>

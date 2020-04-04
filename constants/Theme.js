@@ -20,8 +20,8 @@ export default {
   dark: false,
   roundness: 4,
   colors: {
-    primary: bittersweet,
-    accent: yankeeBlue,
+    primary: yankeeBlue,
+    accent: bittersweet,
     background: white,
     surface: white,
     error: passiveAgressive,
