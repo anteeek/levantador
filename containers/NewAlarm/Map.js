@@ -1,79 +1,118 @@
-import React, { useEffect, useState } from "react";
-import { useNavigation } from '@react-navigation/native';
-
+import React from "react";
+import { useNavigation, useTheme } from '@react-navigation/native';
 
 import * as Permissions from 'expo-permissions';
 import * as Location from 'expo-location';
-import MapView, {Marker} from 'react-native-maps';
+import MapView, {Marker, Callout} from 'react-native-maps';
 
 import LocationDialog from "./LocationDialog";
 
+import {mapTheme as darkMapTheme} from "../../constants/DarkTheme";
 
-export default ({ onLocationChange }) =>{ 
 
-    const { navigate } = useNavigation();
+class Map extends React.PureComponent {
 
-    const [mapLocation, setMapLocation] = useState({
-        latitude: 37.78825,
-        longitude: -122.4324
-    });
-
-    const [isDialogActive, setDialogActive] = useState(false);
-
-    useEffect(() => {
-        const setInitialDialogState = async () => {
-            const permissionsGranted = await areLocationPermissionsGranted();
-            
-            if(permissionsGranted === false)
-                setDialogActive(true);
+    state = {
+        isDialogActive: false,
+        
+        mapLocation: {
+            latitude: 37.78825,
+            longitude: -122.4324,
+            latitudeDelta: 0.5,
+            longitudeDelta: 0.5
+        },
+        markerLocation:  {
+            latitude: 37.78825,
+            longitude: -122.4324,
+            latitudeDelta: 0.5,
+            longitudeDelta: 0.5
         }
-        setInitialDialogState();
-    }, []);
+        
+    };
 
+    async componentDidMount() {
+        const permissionsGranted = await this.areLocationPermissionsGranted();
 
-    return (
-    <>
-        <LocationDialog 
-                isActive={isDialogActive} 
-                onDismiss={() => navigate("Root", {screen: "Home"})}
-                onAccept={() => onDialogAccept(setDialogActive, setLocation)}
-            />
+        if(!permissionsGranted) 
+            this.setState({isDialogActive: true});
+        else 
+            await this.setLocation();
+    }
 
-        <MapView 
-            style={styles.map}
-            region={mapLocation}
-        >
-            
-        </MapView>
-    </>
-)}
+    onDialogAccept = async () => {
+        this.setState({isDialogActive: false});
+
+        const userGrantedPermissions = await this.askForLocationPermission();
+
+        if(userGrantedPermissions)
+            await this.setLocation();
+        else 
+            this.setState({isDialogActive: true});
+    }
+
+    askForLocationPermission = async () => {
+        const { status } = await Permissions.askAsync(Permissions.LOCATION);
+        
+        return status === "granted";
+    }
+
+    setLocation = async () => {
+        const { coords } = await Location.getCurrentPositionAsync({});
+
+        coords.latitudeDelta = coords.longitudeDelta = 0.5;
+    
+        this.setState({mapLocation: coords, markerLocation: coords});
+    }
+
+    areLocationPermissionsGranted = async () => {
+        const { status } = await Permissions.getAsync(Permissions.LOCATION);
+        return status === "granted";
+    }    
+
+    onNewMarkerLocation = newLocation =>{ 
+        console.log(newLocation);
+        this.setState({markerLocation: {newLocation}})
+    }
+
+    render() {
+
+        return (
+            <>
+                <LocationDialog 
+                    isActive={this.state.isDialogActive} 
+                    onDismiss={() => this.props.navigation.navigate("Root", {screen: "Home"})}
+                    onAccept={this.onDialogAccept}
+                />
+        
+                <MapView 
+                    style={styles.map}
+                    customMapStyle={this.props.theme.dark ? darkMapTheme : []}
+                    region={this.state.mapLocation}
+                    showsUserLocation={true}
+                    onRegionChangeComplete={ newLocation => this.setState({mapLocation: newLocation})}
+                >
+                <Marker
+                    coordinate={this.state.markerLocation}
+                />
+                    
+                </MapView>
+            </>
+        )
+    }
+}
 
 const styles = {
     map: {
-        
+        flex: 10,
+        width: "100%"
     }
 }
 
-const onDialogAccept = async (setDialogActive, setLocation) => {
-    try {
-        setDialogActive(false);
-        const {coords: {latitude, longitude}} = await getLocation();
+const MapWithInjectedNavigationAndTheme = props => {
+    const navigation = useNavigation();
+    const theme = useTheme();
 
-        setLocation({latitude, longitude});
-    } catch(e) {
-        setDialogActive(true);
-    }
+    return <Map {...props} navigation={navigation} theme={theme} />;
 }
 
-const areLocationPermissionsGranted = async () => {
-    const { status } = await Permissions.getAsync(Permissions.LOCATION);
-    return status === "granted";
-}
-
-const getLocation = async () => {
-    let { status } = await Permissions.askAsync(Permissions.LOCATION);
-    if (status !== 'granted') 
-        throw new Error("Location permissions not granted");
-
-    return await Location.getCurrentPositionAsync({});
-}
+export default MapWithInjectedNavigationAndTheme;
