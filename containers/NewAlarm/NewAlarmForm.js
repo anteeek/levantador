@@ -8,7 +8,12 @@ import LocationSelectionStep from "./LocationSelectionStep";
 export default class extends React.PureComponent {
 
     state = {
-        location: "",
+        location: {
+            latitude: 0,
+            longitude: 0,
+            latitudeDelta: 0.5,
+            longitudeDelta: 0.5
+        },
         basedOn: "time",
         howLong: "",
         howFar: ""
@@ -19,13 +24,17 @@ export default class extends React.PureComponent {
     };
 
     onChangeValue = (key, newValue) => {
-
+        this.setState({[key]: newValue});
     };
 
     render() {
 
         return (
-            <PaginationWizard onSubmit={this.onFormSubmitted} onChangeValue={this.onChangeValue} stepNames={["Location", "Based on", "Length"]}>
+            <PaginationWizard 
+              onSubmit={this.onFormSubmitted} 
+              onChangeValue={this.onChangeValue} 
+              values={this.state}
+            >
                 <PaginationWizard.Step>{LocationSelectionStep}</PaginationWizard.Step>
                 <PaginationWizard.Step>{LocationSelectionStep}</PaginationWizard.Step>
             </PaginationWizard>

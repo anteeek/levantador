@@ -3,30 +3,19 @@ import { useNavigation, useTheme } from '@react-navigation/native';
 
 import * as Permissions from 'expo-permissions';
 import * as Location from 'expo-location';
-import MapView, {Marker, Callout} from 'react-native-maps';
+import MapView, { Marker } from 'react-native-maps';
 
 import LocationDialog from "./LocationDialog";
 
 import {mapTheme as darkMapTheme} from "../../constants/DarkTheme";
 
-
+//TODO: add selecting location based on user text input
 class Map extends React.PureComponent {
 
     state = {
         isDialogActive: false,
         
-        mapLocation: {
-            latitude: 37.78825,
-            longitude: -122.4324,
-            latitudeDelta: 0.5,
-            longitudeDelta: 0.5
-        },
-        markerLocation:  {
-            latitude: 37.78825,
-            longitude: -122.4324,
-            latitudeDelta: 0.5,
-            longitudeDelta: 0.5
-        }
+        mapLocation: this.props.markerLocation
         
     };
 
@@ -35,7 +24,7 @@ class Map extends React.PureComponent {
 
         if(!permissionsGranted) 
             this.setState({isDialogActive: true});
-        else 
+        else if(this.props.markerLocation.latitude === 0 && this.props.markerLocation.longitude === 0)
             await this.setLocation();
     }
 
@@ -61,7 +50,9 @@ class Map extends React.PureComponent {
 
         coords.latitudeDelta = coords.longitudeDelta = 0.5;
     
-        this.setState({mapLocation: coords, markerLocation: coords});
+        this.setState({mapLocation: coords});
+
+        this.onNewMarkerLocation(coords);
     }
 
     areLocationPermissionsGranted = async () => {
@@ -69,11 +60,8 @@ class Map extends React.PureComponent {
         return status === "granted";
     }    
 
-    onNewMarkerLocation = newLocation =>{ 
-        console.log(newLocation);
-        this.setState({markerLocation: {newLocation}})
-    }
-
+    onNewMarkerLocation = newLocation => this.props.onChangeValue("location", {...this.props.markerLocation, ...newLocation})
+    
     render() {
 
         return (
@@ -89,13 +77,15 @@ class Map extends React.PureComponent {
                     customMapStyle={this.props.theme.dark ? darkMapTheme : []}
                     region={this.state.mapLocation}
                     showsUserLocation={true}
+                    onLongPress={({nativeEvent: {coordinate}}) => this.onNewMarkerLocation(coordinate)}
                     onRegionChangeComplete={ newLocation => this.setState({mapLocation: newLocation})}
                 >
-                <Marker
-                    coordinate={this.state.markerLocation}
-                />
+                    <Marker
+                        coordinate={this.props.markerLocation}
+                    />
                     
                 </MapView>
+
             </>
         )
     }

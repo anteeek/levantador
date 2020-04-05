@@ -4,20 +4,16 @@ import {Headline, Paragraph} from "react-native-paper";
 
 import Map from "./Map";
 
-export default () =>{
-    
-    
+export default (props) =>{
+        
     return (
         <View style={styles.container}>
             
-            <Map/>
+            <Map onChangeValue={props.onChangeValue} markerLocation={props.values.location} />
 
             <Headline style={styles.callToAction}>
-                Select a location
+                Select the location
             </Headline>
-            <Paragraph>
-                (the marker is draggable, just hold it for a second!)
-            </Paragraph>
 
         </View>
 )}
