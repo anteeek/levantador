@@ -11,6 +11,9 @@ export default ({isActive, onDismiss, onAccept}) => (
         <Paragraph>We need your location in order to set the alarm up. Your data is not sent to any server. Press cancel to exit this screen</Paragraph>
       </Dialog.Content>
       <Dialog.Actions>
+        <Button onPress={onDismiss}>Cancel</Button>
+      </Dialog.Actions>
+      <Dialog.Actions>
         <Button onPress={onAccept}>Okay</Button>
       </Dialog.Actions>
     </Dialog>

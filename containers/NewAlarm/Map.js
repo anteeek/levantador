@@ -1,4 +1,5 @@
 import React from "react";
+import { ActivityIndicator, Portal } from "react-native-paper";
 import { useNavigation, useTheme } from '@react-navigation/native';
 
 import * as Permissions from 'expo-permissions';
@@ -78,23 +79,32 @@ class Map extends React.PureComponent {
                     region={this.state.mapLocation}
                     showsUserLocation={true}
                     onLongPress={({nativeEvent: {coordinate}}) => this.onNewMarkerLocation(coordinate)}
-                    onRegionChangeComplete={ newLocation => this.setState({mapLocation: newLocation})}
+                    onPanDrag={ newLocation => {
+                        if(newLocation.latitude === this.state.mapLocation.latitude && newLocation.longitude === this.state.mapLocation.longitude)
+                            this.setState({mapLocation: newLocation})
+                    }}
                 >
-                    <Marker
-                        coordinate={this.props.markerLocation}
-                    />
-                    
+                    <Marker coordinate={this.props.markerLocation} />
                 </MapView>
 
+                <Portal>
+                    {this.state.mapLocation.latitude === 0 && this.state.mapLocation.longitude === 0 && <ActivityIndicator {...styles.spinner} />}
+                </Portal>
             </>
         )
     }
 }
 
+
 const styles = {
     map: {
         flex: 10,
         width: "100%"
+    },
+    spinner: {
+        size: 75,
+        marginTop: "50%",
+        color: "accent"
     }
 }
 
