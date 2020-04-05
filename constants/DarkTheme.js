@@ -19,7 +19,7 @@ export default {
   colors: {
     ...DefaultTheme.colors,
     primary: white,
-    accent: arsenic,
+    accent: white,
     background: gunmetal,
     error: passiveAgressive,
     onBackground: black,

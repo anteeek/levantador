@@ -26,8 +26,8 @@ const styles = {
         height: "80%",
         alignItems: 'center',
         justifyContent: 'center',
-      },
-      callToAction: {
-          flex: 1
-      }
+    },
+    callToAction: {
+        flex: 1
+    }
 }

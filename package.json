@@ -3,9 +3,9 @@
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "expo start",
-    "android": "expo start --android",
+    "android": "concurrently \"npm run emulator\" \"expo start --android\"",
     "ios": "expo start --ios",
-    "web": "expo start --web",
+    "emulator": "@powershell -Command run_emulator.ps1",
     "eject": "expo eject",
     "test": "jest --watchAll"
   },
@@ -49,6 +49,7 @@
   "devDependencies": {
     "@babel/core": "^7.0.0",
     "babel-preset-expo": "~8.0.0",
+    "concurrently": "^5.1.0",
     "jest-expo": "~36.0.1"
   },
   "private": true

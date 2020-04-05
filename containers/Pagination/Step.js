@@ -15,7 +15,7 @@ export default props =>  {
       </View>
 )};
 
-const PaginationNavigation = ({previousStep, nextStep, currentIndex, isLast}) => (
+const PaginationNavigation = ({previousStep, nextStep, currentIndex, isLast, onSubmit}) => (
     <View style={styles.paginationNavigation}>
                 <Button 
                     icon="skip-previous-circle-outline" 
@@ -30,10 +30,9 @@ const PaginationNavigation = ({previousStep, nextStep, currentIndex, isLast}) =>
                     icon="skip-next-circle-outline" 
                     mode="outlined" 
                     style={styles.button}
-                    disabled={isLast}
-                    onPress={nextStep}
+                    onPress={isLast ? onSubmit : nextStep}
                 >
-                    Next
+                    {isLast ? "Submit" : "Next"}
                 </Button>
     </View>
 )

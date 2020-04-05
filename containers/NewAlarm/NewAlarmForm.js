@@ -4,6 +4,7 @@ import { Text } from "react-native-paper";
 
 import PaginationWizard from "../Pagination/";
 import LocationSelectionStep from "./LocationSelectionStep";
+import BasedOnStep from "./BasedOnStep";
 
 export default class extends React.PureComponent {
 
@@ -20,7 +21,7 @@ export default class extends React.PureComponent {
     };
     
     onFormSubmitted = () => {
-
+        console.log(this.state);
     };
 
     onChangeValue = (key, newValue) => {
@@ -36,7 +37,7 @@ export default class extends React.PureComponent {
               values={this.state}
             >
                 <PaginationWizard.Step>{LocationSelectionStep}</PaginationWizard.Step>
-                <PaginationWizard.Step>{LocationSelectionStep}</PaginationWizard.Step>
+                <PaginationWizard.Step>{BasedOnStep}</PaginationWizard.Step>
             </PaginationWizard>
         )
     }
