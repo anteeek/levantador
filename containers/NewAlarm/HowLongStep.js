@@ -1,39 +1,50 @@
 import React from "react";
 import { View } from "react-native";
 import { Headline, TextInput } from "react-native-paper";
-import { useTheme } from "@react-navigation/native";
 
-export default () => {
-    
-    const theme = useTheme();
-    
+export default ({values: { time, distance, basedOn }, onChangeValue}) => {
+        
     return (
     <View style={styles.root}>
         <Headline style={styles.headline}>Alright, we'll wake you up when you are...</Headline>
 
-        <View style={styles.buttonsContainer}>
+        <View style={styles.inputWrapper}>
             <TextInput
-                label="Phone number"
                 keyboardType="numeric"
+                fontSize={50}
+                style={styles.input}
+                value={basedOn === "time" ? time : distance}
+                onChangeText={newValue => {
+                    if(newValue.match(/^[0-9]*$/gm))
+                      onChangeValue(basedOn, newValue)}   
+                }
             />
         </View>
         
-
-    </View>)
+        <Headline style={styles.headline}>{`${basedOn === "time" ? "minutes" : "meters"} before reaching destination`}</Headline>
+    </View>
+    )
 }
 
 const styles = {
     root: {
-        padding: "5%"
+        padding: "5%",
     },
     headline: {
-        fontSize: 30,
-        fontWeight: "bold"
+        textAlign: "center",
+        fontSize: 40,
+        fontWeight: "bold",
+        paddingTop: 20
     },
-    buttonsContainer: {
-        paddingTop: "30%"
+    inputWrapper: {
+        flexDirection: "row",
+        justifyContent: "center"
     },
-    label: {
-        fontSize: 20
+    input: {
+        fontSize: 130,
+        width: "100%",
+        height: 200,
+        flexDirection: "row",
+        justifyContent: "center"
     }
 }
