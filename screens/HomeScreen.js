@@ -10,7 +10,7 @@ export default ({navigation}) => (
           <Title style={styles.title}>It's been a while! What are we going to do today?</Title>
         </View>
 
-        <Button mode="contained" style={styles.button} onPress={() => navigation.navigate("ExistingAlarms")}>
+        <Button mode="contained" style={styles.button} onPress={() => navigation.navigate("Alarms")}>
           Select an existing alarm
         </Button>
         

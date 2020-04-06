@@ -28,7 +28,7 @@ class NewAlarmForm extends React.PureComponent {
 
         this.props.newAlarm({location, basedOn, time, distance});
 
-        this.props.navigation.navigate("Root");
+        this.props.navigation.navigate("Alarms");
     };
 
     onChangeValue = (key, newValue) => this.setState({[key]: newValue});

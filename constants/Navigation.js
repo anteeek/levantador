@@ -1,7 +1,8 @@
 export default {
     headerTitles: {
-        "Home": "Oye",
-        "About": "Learn more"
+        "Home": "Home",
+        "About": "Learn more",
+        "Alarms": "Alarms"
     },
     initialRouteName: "Home"
 }

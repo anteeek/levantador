@@ -3,7 +3,7 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 
 import Navigation from "../constants/Navigation";
 import TopBar from "./TopBar";
-import {AboutScreen , HomeScreen} from "../screens";
+import {AboutScreen , HomeScreen, AlarmsScreen} from "../screens";
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -13,7 +13,7 @@ export default function MyTabs({ navigation, route }) {
 
   return (
       <Tab.Navigator
-        initialRouteName="Home"
+        initialRouteName="Alarms"
         headerMode="screen"
         screenOptions={{
           header: TopBar
@@ -22,6 +22,12 @@ export default function MyTabs({ navigation, route }) {
         <Tab.Screen 
            name="Home"
            component={HomeScreen}
+           activeColor="black"
+           options={{tabBarIcon: "home"}}
+         />
+         <Tab.Screen 
+           name="Alarms"
+           component={AlarmsScreen}
            activeColor="black"
            options={{tabBarIcon: "alarm"}}
          />

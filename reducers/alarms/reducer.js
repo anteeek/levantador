@@ -1,5 +1,5 @@
 const defaultAlarmsState = {
-    alarms: []
+    locationBased: []
 }
 
 export default (state=defaultAlarmsState, action) => {
@@ -8,9 +8,9 @@ export default (state=defaultAlarmsState, action) => {
         case "ADD_NEW_ALARM": {
             const newAlarm = makeNewAlarm(action.payload);
 
-            const newState = {...state, alarms: [...state.alarms, newAlarm]};
+            const newState = {...state, locationBased: [...state.locationBased, newAlarm]};
             return newState || state;
-        } 
+        }
         default: return state;
     }
 }

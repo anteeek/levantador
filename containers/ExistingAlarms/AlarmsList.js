@@ -5,11 +5,13 @@ import { connect } from "react-redux";
 
 const AlarmsList = ({alarms}) => {
 
-    console.log(alarms);
+    console.log(alarms.locationBased)
 
     return (
         <View>
-
+            {
+                
+            }
         </View>
     )
 }
