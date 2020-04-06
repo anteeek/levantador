@@ -10,7 +10,7 @@ export default (state=defaultAlarmsState, action) => {
 
             const newState = {...state, alarms: [...state.alarms, newAlarm]};
             return newState || state;
-        } break;
+        } 
         default: return state;
     }
 }
