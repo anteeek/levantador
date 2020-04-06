@@ -50,7 +50,8 @@
     "@babel/core": "^7.0.0",
     "babel-preset-expo": "~8.0.0",
     "concurrently": "^5.1.0",
-    "jest-expo": "~36.0.1"
+    "jest-expo": "~36.0.1",
+    "redux-logger": "^3.0.6"
   },
   "private": true
 }

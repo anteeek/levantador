@@ -1,14 +1,14 @@
 import React from "react";
 import { ActivityIndicator, Portal } from "react-native-paper";
-import { useNavigation, useTheme } from '@react-navigation/native';
-
 import * as Permissions from 'expo-permissions';
 import * as Location from 'expo-location';
 import MapView, { Marker } from 'react-native-maps';
 
 import LocationDialog from "./LocationDialog";
 
-import {mapTheme as darkMapTheme} from "../../constants/DarkTheme";
+import { mapTheme as darkMapTheme } from "../../constants/DarkTheme";
+
+import { withNavigation, withTheme } from "../hookHelpers";
 
 //TODO: add selecting location based on user text input
 class Map extends React.PureComponent {
@@ -108,11 +108,5 @@ const styles = {
     }
 }
 
-const MapWithInjectedNavigationAndTheme = props => {
-    const navigation = useNavigation();
-    const theme = useTheme();
 
-    return <Map {...props} navigation={navigation} theme={theme} />;
-}
-
-export default MapWithInjectedNavigationAndTheme;
+export default withNavigation(withTheme(Map));

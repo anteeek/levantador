@@ -7,7 +7,7 @@ class Wizard extends React.PureComponent {
     static Step = Step;
 
     state = {
-        index: 2
+        index: 0
     }
     
     nextStep = () => (this.state.index !== this.props.children.length) && this.setState({index: this.state.index + 1});

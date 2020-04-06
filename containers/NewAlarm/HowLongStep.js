@@ -21,7 +21,7 @@ export default ({values: { time, distance, basedOn }, onChangeValue}) => {
             />
         </View>
         
-        <Headline style={styles.headline}>{`${basedOn === "time" ? "minutes" : "meters"} before reaching destination`}</Headline>
+        <Headline style={styles.headline}>{`${basedOn === "time" ? "minutes" : "kilometers"} before reaching destination`}</Headline>
     </View>
     )
 }

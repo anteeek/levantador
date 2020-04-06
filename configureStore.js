@@ -1,18 +1,20 @@
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { persistStore, persistReducer } from 'redux-persist';
  
-import rootReducer from './reducers';
-import { AsyncStorage } from 'react-native';
+import persistConfig from "./constants/persistConfig";
+import rootReducer from './reducers/';
 
-const persistConfig = {
-  key: 'root',
-  storage: AsyncStorage
-}
-
-const persistedReducer = persistReducer(persistConfig, rootReducer)
+import logger from "redux-logger";
 
 export default () => {
-  let store = createStore(persistedReducer);
+
+  const middlewares = [];
+
+  /*if(process.env["NODE_ENV"] && process.env["NODE_ENV"] === "development")
+    middlewares.push(logger.createLogger());*/
+
+  let store = createStore(persistReducer(persistConfig, rootReducer), applyMiddleware(...middlewares));
   let persistor = persistStore(store);
+
   return { store, persistor };
 }

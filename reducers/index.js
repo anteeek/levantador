@@ -1,5 +1,6 @@
-import reducer from "./reducer";
-
 import { combineReducers } from "redux";
 
-export default combineReducers({reducer});
+import alarms from "./alarms/";
+import settings from "./settings/";
+
+export default combineReducers({alarms, settings})

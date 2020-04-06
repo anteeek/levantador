@@ -1,11 +1,15 @@
 import React from "react";
 
+import { connect } from "react-redux";
+
 import PaginationWizard from "../Pagination/";
 import LocationSelectionStep from "./LocationSelectionStep";
 import BasedOnStep from "./BasedOnStep";
 import HowLongStep from "./HowLongStep";
 
-export default class extends React.PureComponent {
+import { withNavigation } from "../hookHelpers";
+
+class NewAlarmForm extends React.PureComponent {
 
     state = {
         location: {
@@ -20,7 +24,10 @@ export default class extends React.PureComponent {
     };
     
     onFormSubmitted = () => {
-        console.log(this.state);
+
+        this.props.newAlarm({...this.state});
+
+        this.props.navigation.navigate("Root");
     };
 
     onChangeValue = (key, newValue) => this.setState({[key]: newValue});
@@ -40,3 +47,13 @@ export default class extends React.PureComponent {
         )
     }
 }
+
+const mapStateToProps = state => ({
+    alarms: state.alarms
+})
+
+const mapDispatchToProps = dispatch => ({
+    newAlarm: payload => dispatch({ type : "ADD_NEW_ALARM", payload})
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(withNavigation(NewAlarmForm));
