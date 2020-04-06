@@ -2,7 +2,7 @@ import React from "react";
 import { View } from "react-native";
 import { FAB } from "react-native-paper";
 
-import AlarmsList from "../containers/ExistingAlarms/AlarmsList";
+import Alarms from "../containers/ExistingAlarms/Alarms";
 
 export default ({navigation}) => {
 
@@ -11,7 +11,7 @@ export default ({navigation}) => {
     return (
         <View style={styles.root}>
 
-            <AlarmsList/>
+            <Alarms />
 
             <FAB.Group
                 open={fabOpen}

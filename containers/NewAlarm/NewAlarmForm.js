@@ -50,7 +50,7 @@ class NewAlarmForm extends React.PureComponent {
 }
 
 const mapDispatchToProps = dispatch => ({
-    newAlarm: payload => dispatch({ type : "ADD_NEW_ALARM", payload})
+    newAlarm: payload => dispatch({ type : "ADD_NEW_ALARM_LOCATION", payload})
 })
 
 export default connect(null, mapDispatchToProps)(withNavigation(NewAlarmForm));

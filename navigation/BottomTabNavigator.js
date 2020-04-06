@@ -8,7 +8,7 @@ import {AboutScreen , HomeScreen, AlarmsScreen} from "../screens";
 const Tab = createMaterialBottomTabNavigator();
 
 export default function MyTabs({ navigation, route }) {
-
+  
   navigation.setOptions({ headerTitle: getHeaderTitle(route) });
 
   return (
