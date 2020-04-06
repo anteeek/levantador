@@ -13,8 +13,6 @@ export default (state=defaultAlarmsState, action) => {
         } break;
         default: return state;
     }
-
-    return state;
 }
 
 const makeNewAlarm = ({location, basedOn, time, distance}) => {
