@@ -44,7 +44,7 @@ const PaginationNavigation = ({previousStep, nextStep, currentIndex, isLast, onS
                          nextStep
                         }
 
-                        disabled={isSubmited}
+                        disabled={isSubmitted}
                     >
                         {isLast ? "Submit" : "Next"}
                     </Button>
