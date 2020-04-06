@@ -15,27 +15,42 @@ export default props =>  {
       </View>
 )};
 
-const PaginationNavigation = ({previousStep, nextStep, currentIndex, isLast, onSubmit}) => (
-    <View style={styles.paginationNavigation}>
-                <Button 
-                    icon="skip-previous-circle-outline" 
-                    mode="outlined" style={styles.button} 
-                    onPress={previousStep}
-                    disabled={currentIndex === 0}
-                >
-                    Previous
-                </Button>
-                <View style={{flex: 2}}/>
-                <Button 
-                    icon="skip-next-circle-outline" 
-                    mode="outlined" 
-                    style={styles.button}
-                    onPress={isLast ? onSubmit : nextStep}
-                >
-                    {isLast ? "Submit" : "Next"}
-                </Button>
-    </View>
-)
+const PaginationNavigation = ({previousStep, nextStep, currentIndex, isLast, onSubmit}) => {
+
+    const [isSubmitted, setSubmitted] = React.useState(false);
+
+    return (
+        <View style={styles.paginationNavigation}>
+                    <Button 
+                        icon="skip-previous-circle-outline" 
+                        mode="outlined" style={styles.button} 
+                        onPress={previousStep}
+                        disabled={currentIndex === 0}
+                    >
+                        Previous
+                    </Button>
+                    <View style={{flex: 2}}/>
+                    <Button 
+                        icon="skip-next-circle-outline" 
+                        mode="outlined" 
+                        style={styles.button}
+                        onPress=
+                        {isLast ?
+                            () => {
+                                setSubmitted(true); 
+                                onSubmit();
+                            } 
+                        :
+                         nextStep
+                        }
+
+                        disabled={isSubmited}
+                    >
+                        {isLast ? "Submit" : "Next"}
+                    </Button>
+        </View>
+    )
+}
 
 const styles = {
     root: {

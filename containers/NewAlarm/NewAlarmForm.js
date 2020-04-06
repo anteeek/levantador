@@ -49,12 +49,8 @@ class NewAlarmForm extends React.PureComponent {
     }
 }
 
-const mapStateToProps = state => ({
-    alarms: state.alarms
-})
-
 const mapDispatchToProps = dispatch => ({
     newAlarm: payload => dispatch({ type : "ADD_NEW_ALARM", payload})
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(withNavigation(NewAlarmForm));
+export default connect(null, mapDispatchToProps)(withNavigation(NewAlarmForm));
