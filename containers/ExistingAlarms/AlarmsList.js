@@ -1,6 +1,7 @@
 import React from "react";
 import { View } from "react-native";
 import { Text, Surface } from "react-native-paper";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 export default ({alarms}) => (
     <View>
@@ -10,21 +11,34 @@ export default ({alarms}) => (
     </View>
 )
 
-const Alarm = props => console.log(props) || (
+const Alarm = props => (
     <Surface style={styles.itemWrapper}>
-        <Text>{props.id}</Text>
+
+        <MaterialCommunityIcons name="crosshairs-gps" size={32} />
+
+        <Text style={styles.alarmTitle}>{renderAlarmTitle(props)}</Text>
+
     </Surface>
 )
+
+const renderAlarmTitle = ({type, ...details}) => {
+    switch(type) {
+        case "location": return `${details[details.basedOn]} ${details.basedOn === "time" ? "minutes" : "kilometers"} before ${details.location.latitude}`;
+        case "classic": return `Wake me up on ${details.time}`;
+        case "qrcode": return `Wake me up on ${details.time} and make me scan the code`
+    }
+}
 
 const styles = {
     itemWrapper: {
         flexDirection: "row",
-        justifyContent: "center",
         margin: 20,
-        padding: 8,
+        padding: 10,
         height: 80,
         alignItems: 'center',
-        justifyContent: 'center',
         elevation: 6,
+    },
+    alarmTitle: {
+        paddingLeft: 15
     }
 }
