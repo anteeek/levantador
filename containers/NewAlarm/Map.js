@@ -1,5 +1,4 @@
 import React from "react";
-import { ActivityIndicator, Portal } from "react-native-paper";
 import * as Permissions from 'expo-permissions';
 import * as Location from 'expo-location';
 import MapView, { Marker } from 'react-native-maps';
@@ -17,7 +16,6 @@ class Map extends React.PureComponent {
         isDialogActive: false,
         
         mapLocation: this.props.markerLocation
-        
     };
 
     async componentDidMount() {
@@ -61,7 +59,7 @@ class Map extends React.PureComponent {
         return status === "granted";
     }    
 
-    onNewMarkerLocation = newLocation => this.props.onChangeValue("location", {...this.props.markerLocation, ...newLocation})
+    onNewMarkerLocation = newLocation => this.props.onChangeValue("location", newLocation);
     
     render() {
 
@@ -78,18 +76,12 @@ class Map extends React.PureComponent {
                     customMapStyle={this.props.theme.dark ? darkMapTheme : []}
                     region={this.state.mapLocation}
                     showsUserLocation={true}
-                    onLongPress={({nativeEvent: {coordinate}}) => this.onNewMarkerLocation(coordinate)}
-                    onPanDrag={ newLocation => {
-                        if(newLocation.latitude === this.state.mapLocation.latitude && newLocation.longitude === this.state.mapLocation.longitude)
-                            this.setState({mapLocation: newLocation})
-                    }}
+                    onLongPress={(event) => this.onNewMarkerLocation(event.nativeEvent.coordinate)}
+                    onRegionChangeComplete={ newLocation => this.setState({mapLocation: newLocation}) }
                 >
                     <Marker coordinate={this.props.markerLocation} />
                 </MapView>
 
-                <Portal>
-                    {this.state.mapLocation.latitude === 0 && this.state.mapLocation.longitude === 0 && <ActivityIndicator {...styles.spinner} />}
-                </Portal>
             </>
         )
     }
@@ -100,11 +92,6 @@ const styles = {
     map: {
         flex: 10,
         width: "100%"
-    },
-    spinner: {
-        size: 75,
-        marginTop: "50%",
-        color: "accent"
     }
 }
 

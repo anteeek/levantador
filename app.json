@@ -26,7 +26,7 @@
       "supportsTablet": true
     },
     "android": {
-      "package": "mag.levantador",
+      "package": "com.levantador",
       "config": {
         "googleMaps": {
           "apiKey": "AIzaSyBQffJyZje_4vJRjWcVS6AK860D6Fsf_BY"
