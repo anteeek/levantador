@@ -22,8 +22,8 @@ export default {
     accent: white,
     background: gunmetal,
     error: passiveAgressive,
-    onBackground: black,
-    surface: gunmetal,
+    onBackground: arsenic,
+    surface: arsenic,
     text: white,
     disabled: color(white)
       .alpha(0.38)

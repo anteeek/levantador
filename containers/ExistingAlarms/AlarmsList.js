@@ -1,15 +1,22 @@
 import React from "react";
-import { View } from "react-native";
+import { ScrollView } from "react-native";
 import { Text, Surface } from "react-native-paper";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
-export default ({alarms}) => (
-    <View>
-        {
-            alarms.map( alarm => <Alarm key={alarm.id} {...alarm} />)
-        }
-    </View>
-)
+
+export default ({alarms}) => {
+
+    const navigation = useNavigation();
+
+    return  (
+        <ScrollView>
+            {
+                alarms.map( alarm => <Alarm key={alarm.id} onEdit={() => navigation.navigate("EditAlarm", { alarmId: alarm.id } )} {...alarm} />)
+            }
+        </ScrollView>
+    )
+}
 
 const Alarm = props => (
     <Surface style={styles.itemWrapper}>
@@ -34,7 +41,7 @@ const renderAlarmTitle = ({type, ...details}) => {
 const styles = {
     itemWrapper: {
         flexDirection: "row",
-        margin: 20,
+        margin: 10,
         padding: 10,
         height: 80,
         alignItems: 'center',
@@ -42,6 +49,7 @@ const styles = {
     },
     alarmTitle: {
         paddingLeft: 15,
+        paddingRight: 15,
         width: "80%"
     }
 }

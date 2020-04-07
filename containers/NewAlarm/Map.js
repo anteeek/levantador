@@ -9,6 +9,7 @@ import { mapTheme as darkMapTheme } from "../../constants/DarkTheme";
 
 import { withNavigation, withTheme } from "../hookHelpers";
 
+
 //TODO: add selecting location based on user text input
 class Map extends React.PureComponent {
 
