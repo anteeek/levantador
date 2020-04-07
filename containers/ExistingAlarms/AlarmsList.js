@@ -18,6 +18,8 @@ const Alarm = props => (
 
         <Text style={styles.alarmTitle}>{renderAlarmTitle(props)}</Text>
 
+        <MaterialCommunityIcons name="pencil" size={32} onPress={() => console.log("edit alarm of id ", props.id)} />
+
     </Surface>
 )
 
@@ -39,6 +41,7 @@ const styles = {
         elevation: 6,
     },
     alarmTitle: {
-        paddingLeft: 15
+        paddingLeft: 15,
+        width: "80%"
     }
 }
