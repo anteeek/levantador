@@ -3,7 +3,7 @@ import { Linking } from 'expo';
 
 export default function(containerRef) {
   return useLinking(containerRef, {
-    prefixes: [Linking.makeUrl('/')],
+    prefixes: ['/'],
     config: {
       Root: {
         path: 'root',

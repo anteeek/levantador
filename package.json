@@ -1,12 +1,10 @@
 {
   "name": "levantador",
-  "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "start": "expo start",
-    "android": "concurrently \"npm run emulator\" \"expo start --android\"",
-    "ios": "expo start --ios",
+    "start": "react-native start",
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
     "emulator": "@powershell -Command run_emulator.ps1",
-    "eject": "expo eject",
     "test": "jest --watchAll"
   },
   "jest": {
@@ -23,7 +21,7 @@
     "@react-navigation/native": "^5.0.0",
     "@react-navigation/stack": "^5.0.0",
     "@react-navigation/web": "~1.0.0-alpha.9",
-    "expo": "~36.0.0",
+    "expo": "^37.0.6",
     "expo-asset": "~8.0.0",
     "expo-constants": "~8.0.0",
     "expo-font": "~8.0.0",
@@ -31,7 +29,7 @@
     "expo-web-browser": "~8.0.0",
     "react": "~16.9.0",
     "react-dom": "~16.9.0",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-36.0.0.tar.gz",
+    "react-native": "~0.61.4",
     "react-native-gesture-handler": "~1.5.0",
     "react-native-location-view": "^0.3.0",
     "react-native-maps": "^0.27.1",
@@ -39,6 +37,7 @@
     "react-native-reanimated": "^1.7.1",
     "react-native-safe-area-context": "0.6.0",
     "react-native-screens": "2.0.0-alpha.12",
+    "react-native-unimodules": "~0.7.0",
     "react-native-web": "~0.11.7",
     "react-navigation": "^4.3.6",
     "react-navigation-material-bottom-tabs": "^2.2.9",
@@ -48,9 +47,13 @@
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
+    "babel-jest": "~24.9.0",
     "babel-preset-expo": "~8.0.0",
     "concurrently": "^5.1.0",
+    "jest": "~24.9.0",
     "jest-expo": "~36.0.1",
+    "metro-react-native-babel-preset": "~0.56.0",
+    "react-test-renderer": "~16.9.0",
     "redux-logger": "^3.0.6"
   },
   "private": true

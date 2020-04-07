@@ -32,7 +32,9 @@
           "apiKey": "AIzaSyBQffJyZje_4vJRjWcVS6AK860D6Fsf_BY"
         }
       }
-    }
-  }
-
+    },
+    "entryPoint": "node_modules/expo/AppEntry.js"
+  },
+  "displayName": "¡Levántame allí!",
+  "name": "levantador"
 }
