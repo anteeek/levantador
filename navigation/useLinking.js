@@ -18,7 +18,10 @@ export default function(containerRef) {
       },
       ExistingAlarms: {
         path: 'ExistingAlarms'
-      }
+      },
+      EditAlarm: {
+        path: 'EditAlarm'
+      },
     },
   });
 }

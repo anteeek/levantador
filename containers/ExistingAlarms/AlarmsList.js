@@ -25,7 +25,7 @@ const Alarm = props => (
 
         <Text style={styles.alarmTitle}>{renderAlarmTitle(props)}</Text>
 
-        <MaterialCommunityIcons name="pencil" size={32} onPress={() => console.log("edit alarm of id ", props.id)} />
+        <MaterialCommunityIcons name="pencil" size={32} onPress={props.onEdit} />
 
     </Surface>
 )
