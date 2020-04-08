@@ -11,17 +11,33 @@ import { withNavigation } from "../hookHelpers";
 
 class NewAlarmForm extends React.PureComponent {
 
-    state = {
-        location: {
-            latitude: 0,
-            longitude: 0,
-            latitudeDelta: 0.5,
-            longitudeDelta: 0.5
-        },
-        basedOn: "time",
-        time: "5",
-        distance: "1"
-    };
+    constructor(props) {
+        super(props);
+
+        if(props.initialValues)
+            this.state = {
+                time: "5",
+                distance: "1",
+                ...props.initialValues,
+                location: {
+                    ...props.initialValues.location,
+                    latitudeDelta: 0.5,
+                    longitudeDelta: 0.5
+                }
+            }
+        else 
+            this.state = {
+                location: {
+                    latitude: 0,
+                    longitude: 0,
+                    latitudeDelta: 0.5,
+                    longitudeDelta: 0.5
+                },
+                basedOn: "time",
+                time: "5",
+                distance: "1",
+            }
+    }
     
     onFormSubmitted = () => {
         const {location, basedOn, time, distance} = this.state;

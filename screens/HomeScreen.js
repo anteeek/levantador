@@ -14,7 +14,7 @@ export default ({navigation}) => (
           Select an existing alarm
         </Button>
         
-        <Button mode="contained" style={styles.button} onPress={() => navigation.navigate("NewAlarm")}>
+        <Button mode="contained" style={styles.button} onPress={() => navigation.navigate("NewLocationAlarm")}>
           Create a new alarm
         </Button>
 

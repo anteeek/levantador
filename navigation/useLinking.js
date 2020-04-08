@@ -13,8 +13,8 @@ export default function(containerRef) {
           Settings: 'settings',
         },
       },
-      NewAlarm: {
-        path: 'NewAlarm'
+      NewLocationAlarm: {
+        path: 'NewLocationAlarm'
       },
       ExistingAlarms: {
         path: 'ExistingAlarms'

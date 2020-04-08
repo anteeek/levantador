@@ -1,7 +1,7 @@
 import React from "react";
 import { Portal } from "react-native-paper";
 
-import NewAlarmForm from "../containers/NewAlarm/";
+import LocationAlarmForm from "../containers/LocationAlarm/";
 
 
 export default ({navigation}) => {
@@ -10,7 +10,7 @@ export default ({navigation}) => {
     
     return (
         <Portal.Host>
-            <NewAlarmForm />
+            <LocationAlarmForm />
         </Portal.Host>
     )
 }

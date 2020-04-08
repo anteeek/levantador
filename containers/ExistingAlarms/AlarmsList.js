@@ -1,18 +1,28 @@
 import React from "react";
-import { ScrollView } from "react-native";
+import { ScrollView, View } from "react-native";
 import { Text, Surface } from "react-native-paper";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useTheme } from "@react-navigation/native";
 
+import renderAlarmTitle from "./renderAlarmTitle";
 
-export default ({alarms}) => {
+export default ({alarms, onDelete}) => {
 
     const navigation = useNavigation();
+    const theme = useTheme();
 
     return  (
         <ScrollView>
             {
-                alarms.map( alarm => <Alarm key={alarm.id} onEdit={() => navigation.navigate("EditAlarm", { alarmId: alarm.id } )} {...alarm} />)
+                alarms.map( alarm => (
+                <Alarm
+                    {...alarm} 
+                    key={alarm.id}
+                    theme={theme}
+                    onEdit={() => navigation.navigate("EditAlarm", { alarmId: alarm.id } )} 
+                    onDelete={() => onDelete(alarm.id)}
+                />)
+                )
             }
         </ScrollView>
     )
@@ -21,22 +31,17 @@ export default ({alarms}) => {
 const Alarm = props => (
     <Surface style={styles.itemWrapper}>
 
-        <MaterialCommunityIcons name="crosshairs-gps" size={32} />
+        <MaterialCommunityIcons name="crosshairs-gps" size={32} color={props.theme.colors.primary} />
 
         <Text style={styles.alarmTitle}>{renderAlarmTitle(props)}</Text>
 
-        <MaterialCommunityIcons name="pencil" size={32} onPress={props.onEdit} />
+        <View>
+            <MaterialCommunityIcons name="pencil" size={32} onPress={props.onEdit} color={props.theme.colors.primary} />
+            <MaterialCommunityIcons name="delete" size={32} onPress={props.onDelete} color={props.theme.colors.primary} />
+        </View>
 
     </Surface>
 )
-
-const renderAlarmTitle = ({type, ...details}) => {
-    switch(type) {
-        case "location": return `${details[details.basedOn]} ${details.basedOn === "time" ? "minutes" : "kilometers"} before ${details.location.latitude}`;
-        case "classic": return `Wake me up on ${details.time}`;
-        case "qrcode": return `Wake me up on ${details.time} and make me scan the code`
-    }
-}
 
 const styles = {
     itemWrapper: {
