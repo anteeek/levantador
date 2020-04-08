@@ -4,22 +4,32 @@ import { View, Text } from "react-native";
 import LocationAlarmForm from "../containers/LocationAlarm";
 import { connect } from "react-redux";
 
-const EditAlarmScreen = ({ alarms, navigation, route: { params : { alarmId } } }) => {
+const EditAlarmScreen = ({ editAlarm, alarms, navigation, route: { params : { alarmId } } }) => {
+
+    console.log(editAlarm);
 
     navigation.setOptions({ headerTitle: "Edit alarm" });
 
     const alarm = alarms.find( ({id}) => id === alarmId);
 
+    const formComponentProps = {
+        initialValues: alarm,
+        onFinished: values => editAlarm({alarmId, newValues: values})
+    }
+
     switch(alarm.type) {
-        case "location": return <LocationAlarmForm initialValues={alarm} />
+        case "location": return <LocationAlarmForm {...formComponentProps} />
     }
 }
 
 const mapStateToProps = state => ({
     alarms: state.alarms
 })
+const mapDispatchToProps = dispatch => ({
+    editAlarm: payload => dispatch({ type : "EDIT_ALARM", payload})
+})
 
-export default connect(mapStateToProps)(EditAlarmScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(EditAlarmScreen);
 
 const styles = {
     root: {

@@ -18,6 +18,19 @@ export default (state=defaultAlarmsState, action) => {
 
             return newState || state;
         }
+        case "EDIT_ALARM": {
+            const {alarmId, newValues} = action.payload;
+
+            const newState = [...state];
+
+            const editedAlarm = _.find(newState, ({id}) => id === alarmId);
+            _.remove(newState, ({id}) => id === alarmId);
+
+            Object.entries(newValues).forEach( ([key, value]) => editedAlarm[key] = value);
+            newState.push(editedAlarm);
+
+            return newState || state;
+        }
         default: return state;
     }
 }
