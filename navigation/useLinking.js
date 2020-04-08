@@ -16,6 +16,9 @@ export default function(containerRef) {
       NewLocationAlarm: {
         path: 'NewLocationAlarm'
       },
+      NewClassicAlarm: {
+        path: 'NewClassicAlarm'
+      },
       ExistingAlarms: {
         path: 'ExistingAlarms'
       },

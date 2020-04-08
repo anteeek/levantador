@@ -18,7 +18,7 @@ export default ({navigation}) => {
                 open={fabOpen}
                 icon={fabOpen ? 'alarm' : 'alarm-plus'}
                 actions={[
-                { icon: 'alarm', label: 'Traditional', onPress: () => console.log('Pressed star')},
+                { icon: 'alarm', label: 'Traditional', onPress: () => navigation.navigate("NewClassicAlarm") },
                 { icon: 'crosshairs-gps', label: 'Location-based', onPress: () => navigation.navigate("NewLocationAlarm") },
                 { icon: 'qrcode', label: 'QR-based', onPress: () => console.log('Pressed notifications') },
                 ]}
