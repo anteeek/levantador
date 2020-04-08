@@ -23,7 +23,7 @@ class Alarms extends React.PureComponent {
         if(this.state.selectedFilter === newFilter)
             this.setState({selectedFilter: "", displayedAlarms: this.props.alarms});
         else 
-            this.setState({selectedFilter: newFilter, displayedAlarms: this.getFilteredAlarms(this.props.alarms, newFilter)})    
+            this.setState({selectedFilter: newFilter, displayedAlarms: Alarms.filterAlarms(this.props.alarms, newFilter)})    
             
     }
 
