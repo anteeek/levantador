@@ -6,8 +6,6 @@ import { connect } from "react-redux";
 
 const EditAlarmScreen = ({ editAlarm, alarms, navigation, route: { params : { alarmId } } }) => {
 
-    console.log(editAlarm);
-
     navigation.setOptions({ headerTitle: "Edit alarm" });
 
     const alarm = alarms.find( ({id}) => id === alarmId);
