@@ -42,7 +42,7 @@ class NewAlarmForm extends React.PureComponent {
     onFormSubmitted = () => {
         const {location, basedOn, time, distance} = this.state;
 
-        this.props.newAlarm({location, basedOn, time, distance});
+        this.props.onFinished({location, basedOn, time, distance});
 
         this.props.navigation.navigate("Alarms");
     };
@@ -65,8 +65,4 @@ class NewAlarmForm extends React.PureComponent {
     }
 }
 
-const mapDispatchToProps = dispatch => ({
-    newAlarm: payload => dispatch({ type : "ADD_NEW_ALARM_LOCATION", payload})
-})
-
-export default connect(null, mapDispatchToProps)(withNavigation(NewAlarmForm));
+export default withNavigation(NewAlarmForm);
