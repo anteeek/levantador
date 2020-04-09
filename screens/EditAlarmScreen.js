@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text } from "react-native";
 
 import LocationAlarmForm from "../containers/LocationAlarm";
+import ClassicAlarmForm from "../containers/ClassicAlarm";
 import { connect } from "react-redux";
 
 const EditAlarmScreen = ({ editAlarm, alarms, navigation, route: { params : { alarmId } } }) => {
@@ -16,7 +17,8 @@ const EditAlarmScreen = ({ editAlarm, alarms, navigation, route: { params : { al
     }
 
     switch(alarm.type) {
-        case "location": return <LocationAlarmForm {...formComponentProps} />
+        case "location": return <LocationAlarmForm {...formComponentProps} />;
+        case "classic": return <ClassicAlarmForm {...formComponentProps} />;
     }
 }
 

@@ -4,7 +4,7 @@ import { Text, Surface } from "react-native-paper";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useNavigation, useTheme } from "@react-navigation/native";
 
-import {alarmTitle, getIcon} from "./alarmChipStrings";
+import {renderTitle, getIcon} from "./alarmChipStrings";
 
 export default ({alarms, onDelete}) => {
 
@@ -33,7 +33,7 @@ const Alarm = props => (
 
         <MaterialCommunityIcons name={getIcon(props)} size={32} color={props.theme.colors.primary} />
 
-        <Text style={styles.alarmTitle}>{alarmTitle(props)}</Text>
+        <Text style={styles.alarmTitle}>{renderTitle(props)}</Text>
 
         <View>
             <MaterialCommunityIcons name="pencil" size={32} onPress={props.onEdit} color={props.theme.colors.primary} />
