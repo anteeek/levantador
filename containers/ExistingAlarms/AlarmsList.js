@@ -1,12 +1,12 @@
 import React from "react";
 import { ScrollView, View } from "react-native";
-import { Text, Surface } from "react-native-paper";
+import { Text, Surface, Switch } from "react-native-paper";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useNavigation, useTheme } from "@react-navigation/native";
 
 import {renderTitle, getIcon} from "./alarmChipStrings";
 
-export default ({alarms, onDelete}) => {
+export default ({alarms, onDelete, onSwitchActivity}) => {
 
     const navigation = useNavigation();
     const theme = useTheme();
@@ -21,6 +21,7 @@ export default ({alarms, onDelete}) => {
                     theme={theme}
                     onEdit={() => navigation.navigate("EditAlarm", { alarmId: alarm.id } )} 
                     onDelete={() => onDelete(alarm.id)}
+                    onSwitchActivity={() => onSwitchActivity(alarm.id, !alarm.isActive)}
                 />)
                 )
             }
@@ -31,7 +32,13 @@ export default ({alarms, onDelete}) => {
 const Alarm = props => (
     <Surface style={styles.itemWrapper}>
 
-        <MaterialCommunityIcons name={getIcon(props)} size={32} color={props.theme.colors.primary} />
+        <View style={styles.iconsWrapper}>
+            <MaterialCommunityIcons name={getIcon(props)} size={32} color={props.theme.colors.primary} />
+            <Switch 
+                value={props.isActive}
+                onValueChange={props.onSwitchActivity}
+            />
+        </View>
 
         <Text style={styles.alarmTitle}>{renderTitle(props)}</Text>
 
@@ -56,5 +63,8 @@ const styles = {
         paddingLeft: 15,
         paddingRight: 15,
         width: "80%"
+    },
+    iconsWrapper: {
+        alignItems: "center"
     }
 }

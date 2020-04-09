@@ -23,6 +23,7 @@ export default (state=defaultAlarmsState, action) => {
             return newState || state;
         }
         case "EDIT_ALARM": {
+            console.log(action);
             const newState = getStateWithEditedAlarmOfId(state, action.payload);
 
             return newState || state;

@@ -18,4 +18,3 @@ export const getStateWithEditedAlarmOfId = (state, {alarmId, newValues}) => {
 
     return newState;
 }
-
