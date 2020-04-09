@@ -1,6 +1,9 @@
 import { v1 as makeUniqueId } from 'uuid';
 import _ from "lodash";
 
+import { makeNewClassicAlarm, makeNewLocationAlarm } from "./newAlarms"
+import { getStateWithEditedAlarmOfId, getStateWithDeletedAlarmOfId } from "./manageExistingAlarms";
+
 const defaultAlarmsState = []
 
 export default (state=defaultAlarmsState, action) => {
@@ -10,45 +13,20 @@ export default (state=defaultAlarmsState, action) => {
             const newState = [...state, makeNewLocationAlarm(action.payload)];
             return newState || state;
         }
+        case "ADD_NEW_CLASSIC_ALARM": {
+            const newState = [...state, makeNewClassicAlarm(action.payload)];
+            return newState || state;
+        }
         case "DELETE_ALARM": {
-            const alarmId = action.payload;
-
-            const newState = [...state];
-            _.remove(newState, ({id}) => id === alarmId);
+            const newState = getStateWithDeletedAlarmOfId(state, action.payload);
 
             return newState || state;
         }
         case "EDIT_ALARM": {
-            const {alarmId, newValues} = action.payload;
-
-            const newState = [...state];
-
-            const editedAlarm = _.find(newState, ({id}) => id === alarmId);
-            _.remove(newState, ({id}) => id === alarmId);
-
-            Object.entries(newValues).forEach( ([key, value]) => editedAlarm[key] = value);
-            newState.push(editedAlarm);
+            const newState = getStateWithEditedAlarmOfId(state, action.payload);
 
             return newState || state;
         }
         default: return state;
     }
-}
-
-const makeNewLocationAlarm = ({location, basedOn, time, distance}) => {
-    const newAlarm = { basedOn, location };
-
-    if(basedOn === "time")
-        newAlarm["time"] = time;
-    else 
-        newAlarm["distance"] = distance;
-
-    if(newAlarm[basedOn] === "")
-        newAlarm[basedOn] = "0";
-
-    newAlarm["id"] = makeUniqueId();
-    newAlarm["type"] = "location";
-    newAlarm["isActive"] = true;
-
-    return newAlarm;
 }
