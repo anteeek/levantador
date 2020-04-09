@@ -9,7 +9,7 @@ import { withNavigation } from "../hookHelpers";
 
 class NewAlarmForm extends React.PureComponent {
 
-    state = {
+    state = this.props.initialValues || {
         time: "6:30",
         hasSnooze: false
     }

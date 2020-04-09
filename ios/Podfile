@@ -43,4 +43,6 @@ target 'levantador' do
 
   # react-native-cli autolinking
   use_native_modules!
+  pod 'react-native-appearance', :path => '../node_modules/react-native-appearance'
+
 end
