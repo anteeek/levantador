@@ -1,6 +1,5 @@
 import React from "react";
 import { View } from "react-native";
-import { Appearance } from "react-native-appearance"
 import { Text, Button } from "react-native-paper";
 
 import DateTimePickerModal from "@react-native-community/datetimepicker";

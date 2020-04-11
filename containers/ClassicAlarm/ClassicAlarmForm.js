@@ -6,12 +6,17 @@ import TimeSelectionStep from "./TimeSelectionStep";
 import HasSnoozeStep from "./HasSnoozeStep";
 
 import { withNavigation } from "../hookHelpers";
+import { NativeModules } from "react-native";
 
 class NewAlarmForm extends React.PureComponent {
 
     state = this.props.initialValues || {
         time: "6:30",
         hasSnooze: false
+    }
+
+    componentDidMount() {
+        console.log(NativeModules);
     }
     
     onFormSubmitted = () => {
