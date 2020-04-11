@@ -6,7 +6,8 @@
     "ios": "react-native run-ios",
     "emulator": "@powershell -Command run_emulator.ps1",
     "test": "jest --watchAll",
-    "rebuild": "cd android && ./gradlew clean && ./gradlew cleanBuildCache"
+    "clean": "cd android && ./gradlew --stop && ./gradlew clean && ./gradlew cleanBuildCache",
+    "restart": "yarn clean && yarn android"
   },
   "jest": {
     "preset": "jest-expo"

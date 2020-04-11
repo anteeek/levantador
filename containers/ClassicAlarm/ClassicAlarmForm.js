@@ -16,7 +16,7 @@ class NewAlarmForm extends React.PureComponent {
     }
 
     componentDidMount() {
-        console.log(NativeModules);
+        NativeModules.Alarm.exampleMethod("ehhehehehehe", 100);
     }
     
     onFormSubmitted = () => {

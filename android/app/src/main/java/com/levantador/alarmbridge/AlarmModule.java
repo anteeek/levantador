@@ -9,13 +9,13 @@ import com.facebook.react.modules.core.DeviceEventManagerModule;
 import java.util.HashMap;
 import java.util.Map;
 
+import android.widget.Toast;
+
+
 public class AlarmModule extends ReactContextBaseJavaModule {
-    public static final String REACT_CLASS = "Alarm";
     private static ReactApplicationContext reactContext = null;
 
     public AlarmModule(ReactApplicationContext context) {
-        // Pass in the context to the constructor and save it so you can emit events
-        // https://facebook.github.io/react-native/docs/native-modules-android.html#the-toast-module
         super(context);
 
         reactContext = context;
@@ -23,25 +23,25 @@ public class AlarmModule extends ReactContextBaseJavaModule {
 
     @Override
     public String getName() {
-        // Tell React the name of the module
-        // https://facebook.github.io/react-native/docs/native-modules-android.html#the-toast-module
-        return REACT_CLASS;
+        return "Alarm";
     }
 
     @Override
     public Map<String, Object> getConstants() {
-        // Export any constants to be used in your native module
-        // https://facebook.github.io/react-native/docs/native-modules-android.html#the-toast-module
         final Map<String, Object> constants = new HashMap<>();
+       
         constants.put("EXAMPLE_CONSTANT", "example");
 
         return constants;
     }
 
     @ReactMethod
-    public void exampleMethod () {
-        // An example native method that you will expose to React
-        // https://facebook.github.io/react-native/docs/native-modules-android.html#the-toast-module
+    public void exampleMethod (String message, int duration) {
+        Toast.makeText(getReactApplicationContext(), message, duration).show();
     }
 
+    /**
+        Even though the CLI didn't work, this code is copied from react-native-create-bridge/master/templates/java
+        Thanks!
+     */
 }
