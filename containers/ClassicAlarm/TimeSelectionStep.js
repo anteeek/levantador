@@ -1,5 +1,5 @@
 import React from "react";
-import { View } from "react-native";
+import { View, NativeModules } from "react-native";
 import { Text, Button } from "react-native-paper";
 
 import DateTimePickerModal from "@react-native-community/datetimepicker";
@@ -37,7 +37,9 @@ export default ({values, onChangeValue}) => {
                     <Text style={styles.valueNotice}>
                         Alarm's time: {values.time}
                     </Text>
-                    <Button style={styles.button} mode="contained" onPress={() => togglePickerVisible(true)}>
+                    <Button style={styles.button} mode="contained" onPress={() =>{
+                        NativeModules.Alarm.set();
+                    } }>
                         Change
                     </Button>
                 </>

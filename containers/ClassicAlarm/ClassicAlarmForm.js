@@ -14,10 +14,6 @@ class NewAlarmForm extends React.PureComponent {
         time: "6:30",
         hasSnooze: false
     }
-
-    componentDidMount() {
-        NativeModules.Alarm.exampleMethod("ehhehehehehe", 100);
-    }
     
     onFormSubmitted = () => {
         const { time, hasSnooze } = this.state;
