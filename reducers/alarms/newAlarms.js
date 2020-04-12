@@ -1,3 +1,4 @@
+import SharedPreferences from "react-native-shared-preferences";
 import { v1 as makeUniqueId } from 'uuid';
 
 export const makeNewLocationAlarm = ({location, basedOn, time, distance}) => {

@@ -1,5 +1,4 @@
-import { v1 as makeUniqueId } from 'uuid';
-import _ from "lodash";
+import { NativeModules } from "react-native";
 
 import { makeNewClassicAlarm, makeNewLocationAlarm } from "./newAlarms"
 import { getStateWithEditedAlarmOfId, getStateWithDeletedAlarmOfId } from "./manageExistingAlarms";
@@ -15,6 +14,9 @@ export default (state=defaultAlarmsState, action) => {
         }
         case "ADD_NEW_CLASSIC_ALARM": {
             const newState = [...state, makeNewClassicAlarm(action.payload)];
+
+            NativeModules.Alarms.set(action.payload.id, action.payload.time);
+
             return newState || state;
         }
         case "DELETE_ALARM": {

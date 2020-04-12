@@ -18,12 +18,29 @@ import android.widget.EditText;
 import android.widget.Toast;  
 
 
+import com.levantador.alarmbridge.AlarmService;
+
 public class MainActivity extends ReactActivity {
 
     /**
      * Returns the name of the main component registered from JavaScript.
      * This is used to schedule rendering of the component.
      */
+    private static Activity mCurrentActivity = null;
+
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mCurrentActivity = this;
+
+        startService(new Intent(MainActivity.this, AlarmService.class));
+    }
+    
+    public static Activity getActivity(){
+        Activity activity = new Activity();
+        activity = mCurrentActivity;
+        return activity;
+    }
+
     @Override
     protected String getMainComponentName() {
         return "levantador";
@@ -38,6 +55,5 @@ public class MainActivity extends ReactActivity {
             }
         };
     }
-
 
 }

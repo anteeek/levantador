@@ -8,6 +8,7 @@ import com.facebook.react.modules.core.DeviceEventManagerModule;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Calendar;
 import java.io.*; 
 
 import android.app.AlarmManager;
@@ -17,8 +18,12 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.Context;
 import android.os.SystemClock;
+import android.content.SharedPreferences;
+
+import android.app.Activity;
 
 import com.levantador.alarmbridge.AlarmReceiver;
+import com.levantador.MainActivity;
 
 public class AlarmModule extends ReactContextBaseJavaModule {
     private static ReactApplicationContext reactContext = null;
@@ -31,8 +36,7 @@ public class AlarmModule extends ReactContextBaseJavaModule {
         reactContext = context;
 
         alarmReceiver = new AlarmReceiver();
-
-        context.registerReceiver(alarmReceiver, new IntentFilter("REACT_NATIVE_ALARM"));
+        context.registerReceiver(alarmReceiver, new IntentFilter("LEVANTADOR_ALARM_INTENT"));
     }
 
     @Override
@@ -50,27 +54,40 @@ public class AlarmModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void exampleMethod (String message, int duration) {
-        //Toast.makeText(getReactApplicationContext(), message, duration).show();
-
-        set();
+    public void set(String alarmId, int alarmTime) {       
+        initAndSetAlarm(alarmId, alarmTime);
     }
 
-    @ReactMethod
-    public void set() {       
+    private void initAndSetAlarm(String alarmId, int alarmTime) {
+
+        int sequentialAlarmId = syncAlarmWithSharedPreferences(alarmId, alarmTime);
 
         AlarmManager alarmManager = (AlarmManager) reactContext.getSystemService(Context.ALARM_SERVICE);
 
-        Intent intent = new Intent("REACT_NATIVE_ALARM");
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(reactContext, 243, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        Intent intent = new Intent("LEVANTADOR_ALARM_INTENT");
+        intent.putExtra("alarmId", alarmId);
 
-        alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,
-        SystemClock.elapsedRealtime() +
-        1000, 1000, pendingIntent);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(reactContext, sequentialAlarmId, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, alarmTime, 1000 * 60 * 60 * 24, pendingIntent);
     }
+
+    private int syncAlarmWithSharedPreferences(String alarmId, int alarmTime) {
+        SharedPreferences sharedpreferences = reactContext.getSharedPreferences("levantador-alarms", Context.MODE_PRIVATE);	
+        SharedPreferences.Editor driver = sharedpreferences.edit();
+
+        driver.putInt(alarmId, alarmTime).commit();
+
+        int currentAlarmSequentialNumber = sharedpreferences.getInt("alarmSequentialId", 0);
+        driver.putInt("alarmSequentialId", currentAlarmSequentialNumber + 1).commit();
+
+        return currentAlarmSequentialNumber;
+    }
+
     /**
         Even though the CLI didn't work, this code is copied from react-native-create-bridge/master/templates/java
         Thanks!
      */
+
+    
 }

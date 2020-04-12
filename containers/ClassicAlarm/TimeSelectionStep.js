@@ -9,9 +9,7 @@ export default ({values, onChangeValue}) => {
     const [isPickerVisible, togglePickerVisible] = React.useState(true);
 
     const setNewTime = timeStamp => {
-        const tempDate = new Date(timeStamp);
-
-        onChangeValue("time", `${tempDate.getHours()}:${tempDate.getMinutes()}`);
+        onChangeValue("time", timeStamp);
         togglePickerVisible(false);
     }
 
@@ -26,8 +24,17 @@ export default ({values, onChangeValue}) => {
                     onChange={ event => {
                         if(event.type === "dismissed")
                             togglePickerVisible(false);
-                        else 
+                        else {
+                            const alarmDate = new Date(event.nativeEvent.timestamp);
+
+                            if(alarmDate <= Date.now())
+                                alarmDate.setDate(alarmDate.getDate() + 1);
+
+                            NativeModules.Alarm.set("E", alarmDate.getTime());     
+                            
+                            
                             setNewTime(event.nativeEvent.timestamp);                
+                        }
                     }}
                     onTouchCancel={() => togglePickerVisible(false)}
                     value={Date.now()}
@@ -37,9 +44,7 @@ export default ({values, onChangeValue}) => {
                     <Text style={styles.valueNotice}>
                         Alarm's time: {values.time}
                     </Text>
-                    <Button style={styles.button} mode="contained" onPress={() =>{
-                        NativeModules.Alarm.set();
-                    } }>
+                    <Button style={styles.button} mode="contained" onPress={() => togglePickerVisible(true)}>
                         Change
                     </Button>
                 </>
