@@ -1,5 +1,5 @@
 <p align="center"> 
-    <img src="https://raw.githubusercontent.com/anteeek/levantador/master/assets/images/presentation.gif">
+    <img src="https://raw.githubusercontent.com/anteeek/levantador/master/assets/images/levantador.gif">
 </p>
 
 Native Android application attempt. Built with Java, React Native and React Native Paper. It's an alarm clock that has 3 modes:
